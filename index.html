@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard Numismática México</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1>Dashboard Numismática México</h1>
+      <div class="controls">
+        <span class="pill">Origen: data/ventas.xlsx</span>
+        <span id="periodo" class="periodo">Periodo: —</span>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <section class="kpis">
+      <div class="kpi"><div class="kpi-label">GMV</div><div id="kpi-gmv" class="kpi-value">—</div></div>
+      <div class="kpi"><div class="kpi-label">Ventas netas</div><div id="kpi-net" class="kpi-value">—</div></div>
+      <div class="kpi"><div class="kpi-label">Unidades</div><div id="kpi-units" class="kpi-value">—</div></div>
+      <div class="kpi"><div class="kpi-label">Ingresos productos</div><div id="kpi-prod" class="kpi-value">—</div></div>
+      <div class="kpi"><div class="kpi-label">% Ads (GMV)</div><div id="kpi-ads-share" class="kpi-value">—</div></div>
+    </section>
+
+    <!-- GRID 12 columnas -->
+    <main class="grid">
+      <!-- Fila 1 -->
+      <div class="card col-6 h-360"><h3>1) Top 10 fechas (GMV)</h3><div id="chart1" class="chart"></div></div>
+      <div class="card col-3 h-360"><h3>2) Top 10 productos (unidades)</h3><div id="chart2" class="chart"></div></div>
+      <div class="card col-3 h-360"><h3>3) Top 10 productos (ingresos)</h3><div id="chart3" class="chart"></div></div>
+
+      <!-- Fila 2 -->
+      <div class="card col-6 h-420"><h3>4) Ventas por estado</h3><div id="chart4" class="chart"></div></div>
+      <div class="card col-6 h-420"><h3>5) Distribución por estado</h3><div id="chart5" class="chart"></div></div>
+
+      <!-- Fila 3 -->
+      <div class="card col-6 h-300"><h3>6) Tiempo de entrega por día</h3><div id="chart6" class="chart"></div></div>
+      <div class="card col-6 h-300"><h3>7) KPIs (detalle)</h3><pre id="kpi-block" class="kpi-block">—</pre></div>
+
+      <!-- Fila 4 -->
+      <div class="card col-12 h-320"><h3>8) Con vs sin publicidad por día</h3><div id="chart8" class="chart"></div></div>
+
+      <!-- Fila 5 -->
+      <div class="card col-4  h-360"><h3>9) Con vs sin publicidad (comparativa)</h3><div id="chart9" class="chart"></div></div>
+      <div class="card col-8  h-360"><h3>10) Ventas y unidades por producto (Top 15)</h3><div id="chart10" class="chart"></div></div>
+
+      <!-- Fila 6 -->
+      <div class="card col-6 h-360"><h3>11) Evolución mensual (GMV)</h3><div id="chart11" class="chart"></div></div>
+      <div class="card col-3 h-360"><h3>12) Distribución precios unitarios</h3><div id="chart12" class="chart"></div></div>
+      <div class="card col-3 h-360"><h3>13) Top 20 días (agregado por mes)</h3><div id="chart13" class="chart"></div></div>
+
+      <!-- Fila 7 -->
+      <div class="card col-6 h-360"><h3>14) Top 10 municipios</h3><div id="chart14" class="chart"></div></div>
+      <div class="card col-6 h-360"><h3>15) Margen operativo por estado</h3><div id="chart15" class="chart"></div></div>
+    </main>
+
+    <footer class="app-footer">
+      <small>ECharts + SheetJS • Autocarga de Excel</small>
+    </footer>
+  </div>
+
+  <!-- (opcional) selector oculto para fallback sin servidor -->
+  <input id="filepicker" type="file" accept=".xlsx" style="display:none" />
+
+  <!-- Librerías y JS -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

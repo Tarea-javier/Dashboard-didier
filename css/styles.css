@@ -1,0 +1,93 @@
+:root{
+  --bg:#0e1014;
+  --card:#141923;
+  --muted:#9aa6bf;
+  --text:#e7ebf3;
+  --radius:14px;
+  --shadow:0 6px 20px rgba(0,0,0,.25);
+  --border:rgba(255,255,255,.06);
+  --maxw:1440px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+
+.container{max-width:var(--maxw); margin:0 auto; padding:0 24px 32px}
+
+/* Header */
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 0; border-bottom:1px solid var(--border); margin-bottom:12px;
+}
+.app-header h1{font-size:20px; margin:0}
+.controls{display:flex; gap:12px; align-items:center}
+.pill{
+  background:rgba(255,255,255,.06); border:1px solid var(--border);
+  color:#d2d8e5; padding:6px 10px; border-radius:999px; font-size:12px
+}
+.periodo{color:var(--muted); font-size:14px}
+
+/* KPIs */
+.kpis{
+  display:grid; grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:16px; margin:16px 0 20px;
+}
+.kpi{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow); padding:14px 16px;
+}
+.kpi-label{color:var(--muted); font-size:12px; margin-bottom:6px}
+.kpi-value{font-size:28px; font-weight:800; letter-spacing:.2px}
+
+/* Grid 12 columnas */
+.grid{
+  display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:22px;
+}
+
+/* Cards */
+.card{
+  background:var(--card); border-radius:var(--radius); border:1px solid var(--border);
+  box-shadow:var(--shadow); padding:12px 12px 10px; display:flex; flex-direction:column;
+}
+.card h3{margin:6px 8px 10px; font-size:15px; color:#e4e8f2; font-weight:700}
+.chart{height:var(--h,360px)}
+.h-300{--h:300px} .h-320{--h:320px} .h-360{--h:360px}
+.h-420{--h:420px} .h-480{--h:480px}
+
+/* Column spans */
+.col-12{grid-column:span 12} .col-8{grid-column:span 8}
+.col-6{grid-column:span 6}   .col-4{grid-column:span 4}
+.col-3{grid-column:span 3}
+
+/* KPI block */
+.kpi-block{
+  background:#0f131a; color:#dbe4f7; border-radius:10px; padding:14px;
+  font:13px ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+  white-space:pre-wrap; line-height:1.35; border:1px solid var(--border);
+  flex:1; overflow:auto;
+}
+
+/* Footer */
+.app-footer{
+  padding:18px 0; color:var(--muted); text-align:center;
+  border-top:1px solid var(--border); margin-top:28px;
+}
+
+/* Responsivo: <1280 => 6 cols, <960 => 1 col */
+@media (max-width:1280px){
+  .grid{grid-template-columns:repeat(6, minmax(0,1fr))}
+  .col-8,.col-6,.col-4,.col-3{grid-column:span 6}
+  .kpis{grid-template-columns:repeat(3, minmax(0,1fr))}
+}
+@media (max-width:960px){
+  .grid{grid-template-columns:repeat(1, minmax(0,1fr))}
+  .col-8,.col-6,.col-4,.col-3{grid-column:span 1}
+  .kpis{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .kpi-value{font-size:24px}
+}
