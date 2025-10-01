@@ -18,43 +18,228 @@
 
     <!-- KPIs -->
     <section class="kpis">
-      <div class="kpi"><div class="kpi-label">GMV</div><div id="kpi-gmv" class="kpi-value">—</div></div>
-      <div class="kpi"><div class="kpi-label">Ventas netas</div><div id="kpi-net" class="kpi-value">—</div></div>
-      <div class="kpi"><div class="kpi-label">Unidades</div><div id="kpi-units" class="kpi-value">—</div></div>
-      <div class="kpi"><div class="kpi-label">Ingresos productos</div><div id="kpi-prod" class="kpi-value">—</div></div>
-      <div class="kpi"><div class="kpi-label">% Ads (GMV)</div><div id="kpi-ads-share" class="kpi-value">—</div></div>
+      <div class="kpi">
+        <div class="kpi-top">
+          <div class="kpi-icon icon-blue">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-label">GMV</div>
+        <div id="kpi-gmv" class="kpi-value">—</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <div class="kpi-icon icon-green">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-label">Ventas netas</div>
+        <div id="kpi-net" class="kpi-value">—</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <div class="kpi-icon icon-purple">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-label">Unidades</div>
+        <div id="kpi-units" class="kpi-value">—</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <div class="kpi-icon icon-orange">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-label">Ingresos productos</div>
+        <div id="kpi-prod" class="kpi-value">—</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <div class="kpi-icon icon-indigo">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-label">% Ads (GMV)</div>
+        <div id="kpi-ads-share" class="kpi-value">—</div>
+      </div>
     </section>
 
     <!-- GRID 12 columnas -->
     <main class="grid">
       <!-- Fila 1 -->
-      <div class="card col-6 h-360"><h3>1) Top 10 fechas (GMV)</h3><div id="chart1" class="chart"></div></div>
-      <div class="card col-3 h-360"><h3>2) Top 10 productos (unidades)</h3><div id="chart2" class="chart"></div></div>
-      <div class="card col-3 h-360"><h3>3) Top 10 productos (ingresos)</h3><div id="chart3" class="chart"></div></div>
+      <div class="card col-6 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Top 10 fechas (GMV)
+        </h3>
+        <div id="chart1" class="chart"></div>
+      </div>
+
+      <div class="card col-3 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+          Top 10 productos (unidades)
+        </h3>
+        <div id="chart2" class="chart"></div>
+      </div>
+
+      <div class="card col-3 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Top 10 productos (ingresos)
+        </h3>
+        <div id="chart3" class="chart"></div>
+      </div>
 
       <!-- Fila 2 -->
-      <div class="card col-6 h-420"><h3>4) Ventas por estado</h3><div id="chart4" class="chart"></div></div>
-      <div class="card col-6 h-420"><h3>5) Distribución por estado</h3><div id="chart5" class="chart"></div></div>
+      <div class="card col-6 h-420">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Ventas por estado
+        </h3>
+        <div id="chart4" class="chart"></div>
+      </div>
+
+      <div class="card col-6 h-420">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+          </svg>
+          Distribución por estado
+        </h3>
+        <div id="chart5" class="chart"></div>
+      </div>
 
       <!-- Fila 3 -->
-      <div class="card col-6 h-300"><h3>6) Tiempo de entrega por día</h3><div id="chart6" class="chart"></div></div>
-      <div class="card col-6 h-300"><h3>7) KPIs (detalle)</h3><pre id="kpi-block" class="kpi-block">—</pre></div>
+      <div class="card col-6 h-300">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Tiempo de entrega por día
+        </h3>
+        <div id="chart6" class="chart"></div>
+      </div>
+
+      <div class="card col-6 h-300">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          KPIs (detalle)
+        </h3>
+        <pre id="kpi-block" class="kpi-block">—</pre>
+      </div>
 
       <!-- Fila 4 -->
-      <div class="card col-12 h-320"><h3>8) Con vs sin publicidad por día</h3><div id="chart8" class="chart"></div></div>
+      <div class="card col-12 h-320">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Con vs sin publicidad por día
+        </h3>
+        <div id="chart8" class="chart"></div>
+      </div>
 
       <!-- Fila 5 -->
-      <div class="card col-4  h-360"><h3>9) Con vs sin publicidad (comparativa)</h3><div id="chart9" class="chart"></div></div>
-      <div class="card col-8  h-360"><h3>10) Ventas y unidades por producto (Top 15)</h3><div id="chart10" class="chart"></div></div>
+      <div class="card col-4 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+          </svg>
+          Con vs sin publicidad (comparativa)
+        </h3>
+        <div id="chart9" class="chart"></div>
+      </div>
+
+      <div class="card col-8 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Ventas y unidades por producto (Top 15)
+        </h3>
+        <div id="chart10" class="chart"></div>
+      </div>
 
       <!-- Fila 6 -->
-      <div class="card col-6 h-360"><h3>11) Evolución mensual (GMV)</h3><div id="chart11" class="chart"></div></div>
-      <div class="card col-3 h-360"><h3>12) Distribución precios unitarios</h3><div id="chart12" class="chart"></div></div>
-      <div class="card col-3 h-360"><h3>13) Top 20 días (agregado por mes)</h3><div id="chart13" class="chart"></div></div>
+      <div class="card col-6 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+          Evolución mensual (GMV)
+        </h3>
+        <div id="chart11" class="chart"></div>
+      </div>
+
+      <div class="card col-3 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Distribución precios unitarios
+        </h3>
+        <div id="chart12" class="chart"></div>
+      </div>
+
+      <div class="card col-3 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+          </svg>
+          Top 20 días (agregado por mes)
+        </h3>
+        <div id="chart13" class="chart"></div>
+      </div>
 
       <!-- Fila 7 -->
-      <div class="card col-6 h-360"><h3>14) Top 10 municipios</h3><div id="chart14" class="chart"></div></div>
-      <div class="card col-6 h-360"><h3>15) Margen operativo por estado</h3><div id="chart15" class="chart"></div></div>
+      <div class="card col-6 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          Top 10 municipios
+        </h3>
+        <div id="chart14" class="chart"></div>
+      </div>
+
+      <div class="card col-6 h-360">
+        <h3>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          Margen operativo por estado
+        </h3>
+        <div id="chart15" class="chart"></div>
+      </div>
     </main>
 
     <footer class="app-footer">
@@ -62,10 +247,8 @@
     </footer>
   </div>
 
-  <!-- (opcional) selector oculto para fallback sin servidor -->
   <input id="filepicker" type="file" accept=".xlsx" style="display:none" />
 
-  <!-- Librerías y JS -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="js/main.js"></script>
