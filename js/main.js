@@ -79,7 +79,7 @@ function emptyState(msg) {
   if (!grid) return;
   grid.innerHTML = `
     <div class="card col-12" style="min-height:160px;display:flex;justify-content:center;align-items:center">
-      <div style="color:#9aa6bf;text-align:center">${msg}</div>
+      <div style="color:#6b7280;text-align:center">${msg}</div>
     </div>`;
 }
 
@@ -177,6 +177,17 @@ function groupBy(arr, keyFn) {
 const sum = arr => arr.reduce((a, b) => a + (b ?? 0), 0);
 
 // ================== Gráficas (componentes) ======================
+const CHART_COLORS = {
+  primary: '#4f46e5',
+  secondary: '#06b6d4',
+  success: '#10b981',
+  warning: '#f59e0b',
+  danger: '#ef4444',
+  purple: '#8b5cf6',
+  gradient1: ['#4f46e5', '#7c3aed'],
+  gradient2: ['#06b6d4', '#3b82f6']
+};
+
 function baseChart(el) {
   const dom = document.getElementById(el);
   const c = echarts.init(dom, null, { renderer: 'canvas' });
@@ -187,35 +198,104 @@ function baseChart(el) {
 function bar(id, x, y, { rotate = 0, formatter = v => v } = {}) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: formatter },
+    tooltip: { 
+      trigger: 'axis', 
+      axisPointer: { type: 'shadow' }, 
+      valueFormatter: formatter,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     grid: { left: 10, right: 10, top: 10, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: x, axisLabel: { rotate } },
-    yAxis: { type: 'value', axisLabel: { formatter } },
-    series: [{ type: 'bar', data: y, barMaxWidth: 36 }]
+    xAxis: { 
+      type: 'category', 
+      data: x, 
+      axisLabel: { rotate, color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    yAxis: { 
+      type: 'value', 
+      axisLabel: { formatter, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
+    series: [{ 
+      type: 'bar', 
+      data: y, 
+      barMaxWidth: 36,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: CHART_COLORS.primary },
+          { offset: 1, color: CHART_COLORS.purple }
+        ])
+      }
+    }]
   });
 }
 
 function barh(id, yCats, xVals, { formatter = v => v } = {}) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: formatter },
+    tooltip: { 
+      trigger: 'axis', 
+      axisPointer: { type: 'shadow' }, 
+      valueFormatter: formatter,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     grid: { left: 10, right: 10, top: 10, bottom: 10, containLabel: true },
-    xAxis: { type: 'value', axisLabel: { formatter } },
-    yAxis: { type: 'category', data: yCats },
-    series: [{ type: 'bar', data: xVals, barMaxWidth: 20 }]
+    xAxis: { 
+      type: 'value', 
+      axisLabel: { formatter, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
+    yAxis: { 
+      type: 'category', 
+      data: yCats,
+      axisLabel: { color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    series: [{ 
+      type: 'bar', 
+      data: xVals, 
+      barMaxWidth: 20,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+          { offset: 0, color: CHART_COLORS.secondary },
+          { offset: 1, color: CHART_COLORS.primary }
+        ])
+      }
+    }]
   });
 }
 
 function pie(id, data) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'item', valueFormatter: v => fmtMoney(v) },
+    tooltip: { 
+      trigger: 'item', 
+      valueFormatter: v => fmtMoney(v),
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     series: [
       {
         type: 'pie',
         radius: ['45%', '70%'],
-        label: { formatter: '{b}\n{d}%' },
-        data
+        label: { 
+          formatter: '{b}\n{d}%',
+          color: '#374151'
+        },
+        data,
+        itemStyle: {
+          borderRadius: 8,
+          borderColor: '#fff',
+          borderWidth: 2
+        }
       }
     ]
   });
@@ -224,40 +304,136 @@ function pie(id, data) {
 function line(id, x, y, { formatter = v => v } = {}) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis', valueFormatter: formatter },
+    tooltip: { 
+      trigger: 'axis', 
+      valueFormatter: formatter,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     grid: { left: 10, right: 10, top: 10, bottom: 30, containLabel: true },
-    xAxis: { type: 'category', data: x },
-    yAxis: { type: 'value', axisLabel: { formatter } },
-    series: [{ type: 'line', data: y, smooth: true, symbol: 'circle', symbolSize: 6 }]
+    xAxis: { 
+      type: 'category', 
+      data: x,
+      axisLabel: { color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    yAxis: { 
+      type: 'value', 
+      axisLabel: { formatter, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
+    series: [{ 
+      type: 'line', 
+      data: y, 
+      smooth: true, 
+      symbol: 'circle', 
+      symbolSize: 8,
+      lineStyle: { width: 3, color: CHART_COLORS.primary },
+      itemStyle: { color: CHART_COLORS.primary },
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
+          { offset: 1, color: 'rgba(79, 70, 229, 0.05)' }
+        ])
+      }
+    }]
   });
 }
 
 function barGrouped(id, x, series, { rotate = 0, formatter = v => v } = {}) {
   const c = baseChart(id);
+  const colors = [CHART_COLORS.secondary, CHART_COLORS.primary];
   c.setOption({
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: formatter },
-    legend: { top: 0 },
-    grid: { left: 10, right: 10, top: 24, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: x, axisLabel: { rotate } },
-    yAxis: { type: 'value', axisLabel: { formatter } },
-    series: series.map(s => ({ type: 'bar', name: s.name, data: s.data, barMaxWidth: 18 }))
+    tooltip: { 
+      trigger: 'axis', 
+      axisPointer: { type: 'shadow' }, 
+      valueFormatter: formatter,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
+    legend: { 
+      top: 0,
+      textStyle: { color: '#374151' }
+    },
+    grid: { left: 10, right: 10, top: 30, bottom: 60, containLabel: true },
+    xAxis: { 
+      type: 'category', 
+      data: x, 
+      axisLabel: { rotate, color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    yAxis: { 
+      type: 'value', 
+      axisLabel: { formatter, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
+    series: series.map((s, i) => ({ 
+      type: 'bar', 
+      name: s.name, 
+      data: s.data, 
+      barMaxWidth: 18,
+      itemStyle: { color: colors[i % colors.length] }
+    }))
   });
 }
 
 function dualBar(id, cats, ventas, unidades, { fmtLeft = v => v, fmtRight = v => v } = {}) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis' },
-    legend: { top: 0 },
-    grid: { left: 10, right: 10, top: 24, bottom: 18, containLabel: true },
-    xAxis: { type: 'category', data: cats },
+    tooltip: { 
+      trigger: 'axis',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
+    legend: { 
+      top: 0,
+      textStyle: { color: '#374151' }
+    },
+    grid: { left: 10, right: 10, top: 30, bottom: 18, containLabel: true },
+    xAxis: { 
+      type: 'category', 
+      data: cats,
+      axisLabel: { color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
     yAxis: [
-      { type: 'value', name: 'Ventas', axisLabel: { formatter: fmtLeft } },
-      { type: 'value', name: 'Unidades', axisLabel: { formatter: fmtRight } }
+      { 
+        type: 'value', 
+        name: 'Ventas', 
+        axisLabel: { formatter: fmtLeft, color: '#6b7280' },
+        splitLine: { lineStyle: { color: '#f3f4f6' } },
+        nameTextStyle: { color: '#374151' }
+      },
+      { 
+        type: 'value', 
+        name: 'Unidades', 
+        axisLabel: { formatter: fmtRight, color: '#6b7280' },
+        splitLine: { show: false },
+        nameTextStyle: { color: '#374151' }
+      }
     ],
     series: [
-      { name: 'Ventas (MXN)', type: 'bar', data: ventas, barMaxWidth: 30 },
-      { name: 'Unidades', type: 'bar', data: unidades, yAxisIndex: 1, barMaxWidth: 30 }
+      { 
+        name: 'Ventas (MXN)', 
+        type: 'bar', 
+        data: ventas, 
+        barMaxWidth: 30,
+        itemStyle: { color: CHART_COLORS.primary }
+      },
+      { 
+        name: 'Unidades', 
+        type: 'bar', 
+        data: unidades, 
+        yAxisIndex: 1, 
+        barMaxWidth: 30,
+        itemStyle: { color: CHART_COLORS.success }
+      }
     ]
   });
 }
@@ -265,53 +441,148 @@ function dualBar(id, cats, ventas, unidades, { fmtLeft = v => v, fmtRight = v =>
 function comboBarLine(id, cats, ventas, unidades, { fmtBar = v => v, fmtLine = v => v } = {}) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis' },
-    legend: { top: 0 },
-    grid: { left: 10, right: 10, top: 24, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: cats, axisLabel: { rotate: 45 } },
+    tooltip: { 
+      trigger: 'axis',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
+    legend: { 
+      top: 0,
+      textStyle: { color: '#374151' }
+    },
+    grid: { left: 10, right: 10, top: 30, bottom: 60, containLabel: true },
+    xAxis: { 
+      type: 'category', 
+      data: cats, 
+      axisLabel: { rotate: 45, color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
     yAxis: [
-      { type: 'value', name: 'Ventas', axisLabel: { formatter: fmtBar } },
-      { type: 'value', name: 'Unidades', axisLabel: { formatter: fmtLine } }
+      { 
+        type: 'value', 
+        name: 'Ventas', 
+        axisLabel: { formatter: fmtBar, color: '#6b7280' },
+        splitLine: { lineStyle: { color: '#f3f4f6' } },
+        nameTextStyle: { color: '#374151' }
+      },
+      { 
+        type: 'value', 
+        name: 'Unidades', 
+        axisLabel: { formatter: fmtLine, color: '#6b7280' },
+        splitLine: { show: false },
+        nameTextStyle: { color: '#374151' }
+      }
     ],
     series: [
-      { name: 'Ventas (MXN)', type: 'bar', data: ventas, barMaxWidth: 24 },
-      { name: 'Unidades', type: 'line', yAxisIndex: 1, data: unidades, smooth: true, symbol: 'circle', symbolSize: 6 }
+      { 
+        name: 'Ventas (MXN)', 
+        type: 'bar', 
+        data: ventas, 
+        barMaxWidth: 24,
+        itemStyle: { color: CHART_COLORS.primary }
+      },
+      { 
+        name: 'Unidades', 
+        type: 'line', 
+        yAxisIndex: 1, 
+        data: unidades, 
+        smooth: true, 
+        symbol: 'circle', 
+        symbolSize: 6,
+        lineStyle: { width: 3, color: CHART_COLORS.success },
+        itemStyle: { color: CHART_COLORS.success }
+      }
     ]
   });
 }
 
 function area(id, x, y, { formatter = v => v } = {}) {
-  // línea simple (sin degradado)
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis', valueFormatter: formatter },
+    tooltip: { 
+      trigger: 'axis', 
+      valueFormatter: formatter,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     grid: { left: 10, right: 10, top: 10, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: x, axisLabel: { rotate: 45 } },
-    yAxis: { type: 'value', axisLabel: { formatter } },
-    series: [{ type: 'line', data: y, smooth: true, symbol: 'circle', symbolSize: 6 }]
+    xAxis: { 
+      type: 'category', 
+      data: x, 
+      axisLabel: { rotate: 45, color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    yAxis: { 
+      type: 'value', 
+      axisLabel: { formatter, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
+    series: [{ 
+      type: 'line', 
+      data: y, 
+      smooth: true, 
+      symbol: 'circle', 
+      symbolSize: 6,
+      lineStyle: { width: 3, color: CHART_COLORS.primary },
+      itemStyle: { color: CHART_COLORS.primary },
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
+          { offset: 1, color: 'rgba(79, 70, 229, 0.05)' }
+        ])
+      }
+    }]
   });
 }
 
 function histogram(id, labels, counts, mean, median) {
   const c = baseChart(id);
   c.setOption({
-    tooltip: { trigger: 'axis' },
+    tooltip: { 
+      trigger: 'axis',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
+    },
     grid: { left: 10, right: 10, top: 10, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: labels, axisLabel: { rotate: 45 } },
-    yAxis: { type: 'value' },
+    xAxis: { 
+      type: 'category', 
+      data: labels, 
+      axisLabel: { rotate: 45, color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } }
+    },
+    yAxis: { 
+      type: 'value',
+      axisLabel: { color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } }
+    },
     series: [
-      { type: 'bar', data: counts, barMaxWidth: 14 },
+      { 
+        type: 'bar', 
+        data: counts, 
+        barMaxWidth: 14,
+        itemStyle: { color: CHART_COLORS.secondary }
+      },
       {
         type: 'line',
         data: [],
         markLine: {
           symbol: 'none',
-          lineStyle: { type: 'dashed' },
+          lineStyle: { type: 'dashed', color: CHART_COLORS.danger, width: 2 },
           data: [
             { xAxis: mean.toFixed(0), name: `Media ~ ${fmtMoney(mean)}` },
             { xAxis: median.toFixed(0), name: `Mediana ~ ${fmtMoney(median)}` }
           ],
-          label: { formatter: p => p.data?.name || '', position: 'insideEndTop' }
+          label: { 
+            formatter: p => p.data?.name || '', 
+            position: 'insideEndTop',
+            color: '#374151'
+          }
         }
       }
     ]
@@ -324,18 +595,42 @@ function scatter(id, xVals, yVals, cats, { fmt = v => v } = {}) {
   c.setOption({
     tooltip: {
       trigger: 'item',
-      formatter: p => `Día ${p.value[0]} · ${fmt(p.value[1])}<br/>${p.name}`
+      formatter: p => `Día ${p.value[0]} · ${fmt(p.value[1])}<br/>${p.name}`,
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      textStyle: { color: '#374151' }
     },
-    xAxis: { type: 'value', name: 'Día', min: 1, max: 31 },
-    yAxis: { type: 'value', name: 'Ventas (MXN)', axisLabel: { formatter: fmt } },
-    series: [{ type: 'scatter', data, symbolSize: 10 }]
+    xAxis: { 
+      type: 'value', 
+      name: 'Día', 
+      min: 1, 
+      max: 31,
+      axisLabel: { color: '#6b7280' },
+      axisLine: { lineStyle: { color: '#e5e7eb' } },
+      splitLine: { lineStyle: { color: '#f3f4f6' } },
+      nameTextStyle: { color: '#374151' }
+    },
+    yAxis: { 
+      type: 'value', 
+      name: 'Ventas (MXN)', 
+      axisLabel: { formatter: fmt, color: '#6b7280' },
+      splitLine: { lineStyle: { color: '#f3f4f6' } },
+      nameTextStyle: { color: '#374151' }
+    },
+    series: [{ 
+      type: 'scatter', 
+      data, 
+      symbolSize: 10,
+      itemStyle: { color: CHART_COLORS.primary }
+    }]
   });
 }
 
 function emptyMsg(id, msg) {
   const el = document.getElementById(id);
   if (!el) return;
-  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#95a0b3;">${msg}</div>`;
+  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#9ca3af;">${msg}</div>`;
 }
 
 // ================== Render del dashboard (15 vistas) =============
@@ -551,5 +846,3 @@ Ticket Promedio (GMV/tx): ${fmtMoney(GMV / Math.max(1, data.length))}
     barh('chart15', entries.map(e => e[0]), entries.map(e => e[1]), { formatter: v => fmtMoney(v) });
   }
 }
-
-
