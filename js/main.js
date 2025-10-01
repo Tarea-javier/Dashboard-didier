@@ -186,6 +186,7 @@ const CHART_COLORS = {
 
 function baseChart(el) {
   const dom = document.getElementById(el);
+  if (!dom) return null;
   const c = echarts.init(dom, null, { renderer: 'canvas' });
   window.addEventListener('resize', () => c.resize());
   return c;
@@ -193,6 +194,7 @@ function baseChart(el) {
 
 function bar(id, x, y, { rotate = 0, formatter = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis', 
@@ -226,6 +228,7 @@ function bar(id, x, y, { rotate = 0, formatter = v => v } = {}) {
 
 function barh(id, yCats, xVals, { formatter = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis', 
@@ -259,6 +262,7 @@ function barh(id, yCats, xVals, { formatter = v => v } = {}) {
 
 function pie(id, data) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'item', 
@@ -289,6 +293,7 @@ function pie(id, data) {
 
 function line(id, x, y, { formatter = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis', 
@@ -324,6 +329,7 @@ function line(id, x, y, { formatter = v => v } = {}) {
 
 function barGrouped(id, x, series, { rotate = 0, formatter = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   const colors = [CHART_COLORS.secondary, CHART_COLORS.primary];
   c.setOption({
     tooltip: { 
@@ -363,6 +369,7 @@ function barGrouped(id, x, series, { rotate = 0, formatter = v => v } = {}) {
 
 function dualBar(id, cats, ventas, unidades, { fmtLeft = v => v, fmtRight = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis',
@@ -420,6 +427,7 @@ function dualBar(id, cats, ventas, unidades, { fmtLeft = v => v, fmtRight = v =>
 
 function comboBarLine(id, cats, ventas, unidades, { fmtBar = v => v, fmtLine = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis',
@@ -480,6 +488,7 @@ function comboBarLine(id, cats, ventas, unidades, { fmtBar = v => v, fmtLine = v
 
 function area(id, x, y, { formatter = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis', 
@@ -516,6 +525,7 @@ function area(id, x, y, { formatter = v => v } = {}) {
 
 function histogram(id, labels, counts, mean, median) {
   const c = baseChart(id);
+  if (!c) return;
   c.setOption({
     tooltip: { 
       trigger: 'axis',
@@ -566,6 +576,7 @@ function histogram(id, labels, counts, mean, median) {
 
 function scatter(id, xVals, yVals, cats, { fmt = v => v } = {}) {
   const c = baseChart(id);
+  if (!c) return;
   const data = xVals.map((x, i) => ({ value: [xVals[i], yVals[i]], name: cats[i] }));
   c.setOption({
     tooltip: {
@@ -643,13 +654,14 @@ Ticket Promedio (GMV/tx): ${fmtMoney(GMV / Math.max(1, data.length))}
   `.trim();
   setText('kpi-block', kpiBlock);
 
-  // 1) Top 10 fechas (GMV)
+  // 1) Top 10 fechas (GMV) - Dashboard y Ventas
   {
     const g = groupBy(data.filter(d => d.fechaCorta), d => d.fechaCorta);
     const arr = [...g.entries()].map(([date, rows]) => [date, sum(rows.map(r => r.ventasAbs || 0))]);
     arr.sort((a, b) => b[1] - a[1]);
     const top = arr.slice(0, 10).reverse();
     bar('chart1', top.map(d => d[0]), top.map(d => d[1]), { rotate: 45, formatter: v => fmtMoney(v) });
+    bar('chart1-ventas', top.map(d => d[0]), top.map(d => d[1]), { rotate: 45, formatter: v => fmtMoney(v) });
   }
 
   // 2) Top 10 productos (unidades)
@@ -754,12 +766,13 @@ Ticket Promedio (GMV/tx): ${fmtMoney(GMV / Math.max(1, data.length))}
     });
   }
 
-  // 11) Evolución mensual (GMV)
+  // 11) Evolución mensual (GMV) - Dashboard y Ventas
   {
     const g = groupBy(data.filter(d => d.anoMes), d => d.anoMes);
     const entries = [...g.entries()].map(([k, rows]) => [k, sum(rows.map(r => r.ventasAbs || 0))]);
     entries.sort((a, b) => a[0].localeCompare(b[0]));
     area('chart11', entries.map(e => e[0]), entries.map(e => e[1]), { formatter: v => fmtMoney(v) });
+    area('chart11-ventas', entries.map(e => e[0]), entries.map(e => e[1]), { formatter: v => fmtMoney(v) });
   }
 
   // 12) Distribución precios unitarios (histograma)
