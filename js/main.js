@@ -13,7 +13,6 @@ const parseNumber = v => {
   return isNaN(n) ? null : n;
 };
 
-// Excel serial (sistema 1900) -> Date
 function excelSerialToDate(n) {
   if (typeof n !== 'number' || n <= 0) return null;
   const ms = Math.round((n - 25569) * 86400 * 1000);
@@ -153,7 +152,6 @@ function normalizeRows(rows) {
     });
   }
 
-  // periodo
   const fechas = out.map(d => d.fechaVenta).filter(Boolean).sort((a, b) => a - b);
   const periodo =
     fechas.length ? `${fechas[0].toISOString().slice(0, 10)} a ${fechas[fechas.length - 1].toISOString().slice(0, 10)}` : '—';
@@ -183,9 +181,7 @@ const CHART_COLORS = {
   success: '#10b981',
   warning: '#f59e0b',
   danger: '#ef4444',
-  purple: '#8b5cf6',
-  gradient1: ['#4f46e5', '#7c3aed'],
-  gradient2: ['#06b6d4', '#3b82f6']
+  purple: '#8b5cf6'
 };
 
 function baseChart(el) {
@@ -223,12 +219,7 @@ function bar(id, x, y, { rotate = 0, formatter = v => v } = {}) {
       type: 'bar', 
       data: y, 
       barMaxWidth: 36,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: CHART_COLORS.primary },
-          { offset: 1, color: CHART_COLORS.purple }
-        ])
-      }
+      itemStyle: { color: CHART_COLORS.primary }
     }]
   });
 }
@@ -261,12 +252,7 @@ function barh(id, yCats, xVals, { formatter = v => v } = {}) {
       type: 'bar', 
       data: xVals, 
       barMaxWidth: 20,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-          { offset: 0, color: CHART_COLORS.secondary },
-          { offset: 1, color: CHART_COLORS.primary }
-        ])
-      }
+      itemStyle: { color: CHART_COLORS.secondary }
     }]
   });
 }
@@ -331,13 +317,7 @@ function line(id, x, y, { formatter = v => v } = {}) {
       symbol: 'circle', 
       symbolSize: 8,
       lineStyle: { width: 3, color: CHART_COLORS.primary },
-      itemStyle: { color: CHART_COLORS.primary },
-      areaStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
-          { offset: 1, color: 'rgba(79, 70, 229, 0.05)' }
-        ])
-      }
+      itemStyle: { color: CHART_COLORS.primary }
     }]
   });
 }
@@ -529,12 +509,7 @@ function area(id, x, y, { formatter = v => v } = {}) {
       symbolSize: 6,
       lineStyle: { width: 3, color: CHART_COLORS.primary },
       itemStyle: { color: CHART_COLORS.primary },
-      areaStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
-          { offset: 1, color: 'rgba(79, 70, 229, 0.05)' }
-        ])
-      }
+      areaStyle: { color: 'rgba(79, 70, 229, 0.1)' }
     }]
   });
 }
@@ -635,7 +610,6 @@ function emptyMsg(id, msg) {
 
 // ================== Render del dashboard (15 vistas) =============
 function renderAll(data) {
-  // KPIs
   const GMV = sum(data.map(d => d.ventasAbs || 0));
   const VNET = sum(data.map(d => d.total || 0));
   const UNITS = sum(data.map(d => d.unidades || 0));
